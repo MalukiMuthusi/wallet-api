@@ -6,6 +6,7 @@ OpenAPI specification of a wallet management API
 
 - OpenAPI Specification (OAS) [OpenAPI-Spec-documentation](2)
 - Swagger Editor [Swagger-editor-github](3)
+- Link to the Swagger editor hosted online for use [Swagger-editor](8)
 - OpenAPI vscode editor [Open-API-marketplace-link](4)
 - Swagger Codegen [Swagger-codegen-github](5)
 - Generate Golang server stubs [go-server-github](6)
@@ -19,3 +20,4 @@ OpenAPI specification of a wallet management API
 [5]: https://github.com/swagger-api/swagger-codegen
 [6]: https://github.com/swagger-api/swagger-codegen/wiki/Server-stub-generator-HOWTO#go-server
 [7]: https://sdkman.io/sdks
+[8]: https://editor.swagger.io
