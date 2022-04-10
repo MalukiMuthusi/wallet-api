@@ -1,4 +1,6 @@
-java -jar /home/maluki/programs/swagger-codegen-cli-2.4.26.jar generate \
-  -i wallet.yaml \
-  -l go-server \
-  -o server
+java  -Dmodels -DmodelDocs=false \
+  -jar $HOME/programs/swagger-codegen-cli.jar generate \
+  -i swagger.yaml \
+  -l go \
+  -o models \
+  -c config.json
