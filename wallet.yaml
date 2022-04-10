@@ -1,34 +1,178 @@
 openapi: 3.0.0
 info:
   title: Wallet API
-  description: Wallet API
-  version: 0.0.1
+  description: Wallet Management API
+  version: v0.0.1
+  contact:
+    name: Maluki Muthusi Maluki
+    url: https://twitter.com/MalukiMuthusi
+    email: malukimuthusi@gmail.com
 
 servers:
-  - url: http://api.example.com/v1/wallets
+  - url: https://api.wallet.riviatechs.com/v1
+    description: Production server
+  - url: https://staging.api.wallet.riviatechs.com/v1
 
 paths:
-  /{wallet_id}/balance:
+  /wallets/{wallet_id}/balance:
     get:
-      summary: Returns a wallet's balance
-      description: Returns the balance of the wallet that has the provided ID
+      summary: Returns a wallet's balance amount
+      description: Returns the balance of the wallet that has the provided id
+      parameters:
+        - $ref: "#/components/parameters/wallet_id"
       responses:
         "200":
-          description: Contains the balance amount
+          description: The returned balance amount
           content:
             application/json:
               schema:
-                type: number
+                $ref: "#/components/schemas/Balance"
 
-  /{wallet_id}/credit:
+        "400":
+          description: Invalid wallet id provided
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicError"
+
+        "404":
+          description: Wallet not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicError"
+
+  /wallets/{wallet_id}/credit:
     post:
+      summary: Add an amount to a wallet
+      description: Adds the provided amount to the wallet that is referred by the provided id
+      parameters:
+        - $ref: "#/components/parameters/wallet_id"
       requestBody:
         description: The amount to be added to the account
         required: true
         content:
           application/json:
             schema:
-              type: number
+              $ref: "#/components/schemas/Amount"
       responses:
         "200":
           description: Returns the new balance of the wallet
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Balance"
+
+        "400":
+          description: Bad request, check the response for the error code and message to see where the problem is
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicError"
+
+        "404":
+          description: Wallet not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicError"
+
+        "422":
+          description: Server could not process your request. Check the response for the error code and the message to see where the probelm is
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicError"
+
+  /wallets/{wallet_id}/debit:
+    post:
+      summary: Subtracts an amount from  a wallet
+      description: Subtracts the given amount from the wallet referred by the provided wallet id
+      parameters:
+        - $ref: "#/components/parameters/wallet_id"
+      requestBody:
+        description: The amount to be subtracted from the account
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Amount"
+
+      responses:
+        "200":
+          description: Returns the new balance of the wallet
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Balance"
+
+        "400":
+          description: Bad request, check the response for the error code and message to see where the problem is
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicError"
+
+        "404":
+          description: Wallet not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicError"
+
+        "422":
+          description: Server could not process your request. Check the response for the error code and the message to see where the probelm is
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicError"
+
+components:
+  schemas:
+    Amount:
+      type: object
+      properties:
+        value:
+          type: string
+        currency:
+          type: string
+          description: Only one currency type is currently supported, euro
+          enum:
+            - EUR
+
+    BasicError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          enum:
+            - INSUFFICIENT_FUNDS
+            - INVALID_AMOUNT_PARAMETER
+            - WALLET_NOT_FOUND
+            - FAILED_TO_COMPLETE_PROCESSING_REQUEST
+            - REQUEST_NOT_ALLOWED
+        message:
+          type: string
+
+    Balance:
+      allOf:
+        - $ref: "#/components/schemas/Amount"
+        - type: string
+          properties:
+            date:
+              type: string
+          required:
+            - date
+
+  parameters:
+    wallet_id:
+      name: wallet_id
+      in: path
+      description: Refers to a wallet by its id
+      required: true
+      schema:
+        type: integer
+        format: int32
