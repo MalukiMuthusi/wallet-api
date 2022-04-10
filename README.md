@@ -2,6 +2,8 @@
 
 OpenAPI specification of a wallet management API
 
+The API documentation is hosted at [API-documentation-site](9). Use it to learn about the APIs provided and their information.
+
 ## References
 
 - OpenAPI Specification (OAS) [OpenAPI-Spec-documentation](2)
@@ -21,3 +23,4 @@ OpenAPI specification of a wallet management API
 [6]: https://github.com/swagger-api/swagger-codegen/wiki/Server-stub-generator-HOWTO#go-server
 [7]: https://sdkman.io/sdks
 [8]: https://editor.swagger.io
+[9]: https://theta-outrider-342406.web.app
