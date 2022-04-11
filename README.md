@@ -1,8 +1,20 @@
 # Wallet API
 
-OpenAPI specification of a wallet management API
+API For an online wallet management application.
 
-The API documentation is hosted at [API-documentation-site](9). Use it to learn about the APIs provided and their information.
+The API documentation is hosted at [https://theta-outrider-342406.web.app](9)
+
+Use the API documentation to learn how to make queries
+
+## Hosting
+
+### Staging
+
+The api staging endpoint is
+
+### Production
+
+The api production endpoint is
 
 ## Set Up and Run App
 
