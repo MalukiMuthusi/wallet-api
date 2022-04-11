@@ -6,19 +6,13 @@ The API documentation is hosted at [https://theta-outrider-342406.web.app][9]
 
 Use the API documentation to learn how to make queries
 
-## Hosting
-
-### Staging
-
-The api staging endpoint is
-
-### Production
-
-The api production endpoint is
-
 ## Set Up and Run App
 
-### Envs
+### Environment variables configurations
+
+This app uses [viper][14] for configuration management
+
+It follows the principles of [12-factor-app][15]
 
 To run the application make sure you have set the following environment variables
 
@@ -44,6 +38,16 @@ export PORT=8080
 Make sure you have go installed. For installation guidance refer to [Golang-installation-page][13]
 In the root folder of the application run `go install`. This will compile and install the application to your `$PATH`
 Run the application `wallet-api`
+
+## Hosting
+
+### Staging
+
+The api staging endpoint is
+
+### Production
+
+The api production endpoint is
 
 ## References
 
@@ -71,3 +75,5 @@ Run the application `wallet-api`
 [11]: https://gorm.io/docs
 [12]: https://stackoverflow.com/questions/34046194/how-to-pass-arguments-to-router-handlers-in-golang-using-gin-web-framework
 [13]: https://go.dev/doc/install
+[14]: https://github.com/spf13/viper
+[15]: https://12factor.net
