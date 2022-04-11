@@ -141,7 +141,6 @@ func CheckMustBeSetEnvs() {
 	EnvMustBeSet(utils.DbPwd)
 	EnvMustBeSet(utils.DbPort)
 	EnvMustBeSet(utils.DbName)
-	EnvMustBeSet(utils.DbHost)
 	EnvMustBeSet(utils.DbHostedOnCloud)
 	EnvMustBeSet(utils.DbConnectionName)
 	EnvMustBeSet(utils.DbTimeZone)
