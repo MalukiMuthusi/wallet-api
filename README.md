@@ -4,19 +4,19 @@ OpenAPI specification of a wallet management API
 
 The API documentation is hosted at [API-documentation-site](9). Use it to learn about the APIs provided and their information.
 
-## Set Up
+## Set Up and Run App
 
-## Envs
+### Envs
 
 To run the application make sure you have set the following environment variables
 
 ```sh
 export WALLET_DB_USER=
 export WALLET_DB_PWD=
-export WALLET_NAME=
-export WALLET_DB_PORT=
-export WALLET_DB_HOST=
-export WALLET_DB_TIMEZONE=
+export WALLET_DB_NAME="wallet"
+export WALLET_DB_PORT="3306"
+export WALLET_DB_HOST="127.0.0.1"
+export WALLET_DB_TIMEZONE="Africa/Nairobi"
 export WALLET_DB_INSTANCE_CONNECTION_NAME="theta-outrider-342406:us-central1:wallet"
 ```
 
@@ -26,6 +26,12 @@ For localhost running the following are already set to defaults
 export WALLET_DB_CLOUD=false
 export PORT=8080
 ```
+
+### Run
+
+Make sure you have go installed. For installation guidance refer to [Golang-installation-page](13)
+In the root folder of the application run `go install`. This will compile and install the application to your `$PATH`
+Run the application `wallet-api`
 
 ## References
 
@@ -52,3 +58,4 @@ export PORT=8080
 [10]: https://dev.mysql.com/doc
 [11]: https://gorm.io/docs
 [12]: https://stackoverflow.com/questions/34046194/how-to-pass-arguments-to-router-handlers-in-golang-using-gin-web-framework
+[13]: https://go.dev/doc/install
