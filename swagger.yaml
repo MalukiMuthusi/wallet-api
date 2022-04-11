@@ -9,9 +9,10 @@ info:
     email: malukimuthusi@gmail.com
 
 servers:
+  - url: https://wallet-api-fur355ca3q-uc.a.run.app/v1
+    description: Staging server
   - url: https://api.wallet.riviatechs.com/v1
     description: Production server
-  - url: https://staging.api.wallet.riviatechs.com/v1
 
 paths:
   /wallets/{wallet_id}/balance:

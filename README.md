@@ -37,6 +37,11 @@ export PORT=8080
 
 The application uses Mysql. But you can add use a different database by providing a dsn configuration to that database.
 
+To generate the mock data use [Dbeaver][17].
+
+The Mysql database used is a managed service provided by Google Cloud.
+Use the Cloud Auth Proxy tool to connect to it from the localhost [Cloud-Auth-Proxy][16]
+
 ### Run
 
 Make sure you have go installed. For installation guidance refer to [Golang-installation-page][13]
@@ -47,7 +52,7 @@ Run the application `wallet-api`
 
 ### Staging
 
-The api staging endpoint is
+The api staging endpoint is [https://wallet-api-fur355ca3q-uc.a.run.app][18]
 
 ### Production
 
@@ -82,3 +87,5 @@ The api production endpoint is
 [14]: https://github.com/spf13/viper
 [15]: https://12factor.net
 [16]: https://cloud.google.com/sql/docs/mysql/sql-proxy "Cloud SQL Auth Proxy"
+[17]: https://dbeaver.io
+[18]: https://wallet-api-fur355ca3q-uc.a.run.app/v1/wallets
