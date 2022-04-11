@@ -33,6 +33,10 @@ export WALLET_DB_CLOUD=false
 export PORT=8080
 ```
 
+### Database Set Up
+
+The application uses Mysql. But you can add use a different database by providing a dsn configuration to that database.
+
 ### Run
 
 Make sure you have go installed. For installation guidance refer to [Golang-installation-page][13]
@@ -77,3 +81,4 @@ The api production endpoint is
 [13]: https://go.dev/doc/install
 [14]: https://github.com/spf13/viper
 [15]: https://12factor.net
+[16]: https://cloud.google.com/sql/docs/mysql/sql-proxy "Cloud SQL Auth Proxy"

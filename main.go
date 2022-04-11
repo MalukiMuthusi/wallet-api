@@ -49,7 +49,7 @@ func main() {
 			wallets.GET(":wallet_id/balance", balanceHandler.Handle)
 
 			wallets.POST(":wallet_id/credit", creditHandler.Handle)
-			
+
 			wallets.POST(":wallet_id/debit", debitHandler.Handle)
 		}
 	}
@@ -113,6 +113,7 @@ func init() {
 	BindEnvs()
 
 	viper.SetDefault(utils.Port, "8080")
+	viper.SetDefault(utils.DbHost, "127.0.0.1")
 	viper.SetDefault(utils.DbHostedOnCloud, false)
 
 	CheckMustBeSetEnvs()
