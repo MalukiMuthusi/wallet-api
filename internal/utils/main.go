@@ -12,6 +12,10 @@ const (
 )
 
 const (
+	ParamWalletId = "wallet_id"
+)
+
+const (
 	DbUser           = "DB_USER"
 	DbPwd            = "DB_PWD"
 	DbName           = "DB_NAME"
@@ -32,3 +36,36 @@ var (
 	ErrInternalServerError     = errors.New("internal server error")
 	ErrOperationNotImplemented = errors.New("operation not implemented")
 )
+
+type CustomErrorCode int32
+
+const (
+	InsufficientFunds CustomErrorCode = iota
+	NotImplemented
+	InternalServerError
+	InvalidAmount
+	WalletNotFound
+	RequestNotAllowed
+	FailedToProcessRequest
+)
+
+func (e CustomErrorCode) String() string {
+	switch e {
+	case InsufficientFunds:
+		return "INSUFFICIENT_FUNDS"
+	case NotImplemented:
+		return "NOT_IMPLIMENTED"
+	case InternalServerError:
+		return "INTERNAL_SERVER_ERROR"
+	case InvalidAmount:
+		return "INVALID_AMOUNT"
+	case WalletNotFound:
+		return "WALLET_NOT_FOUND"
+	case RequestNotAllowed:
+		return "REQUEST_NOT_ALLOWED"
+	case FailedToProcessRequest:
+		return "FAILED_TO_PROCESS_REQUEST"
+	default:
+		return "FAILED_TO_PROCESS_REQUEST"
+	}
+}

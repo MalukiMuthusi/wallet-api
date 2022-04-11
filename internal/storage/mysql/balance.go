@@ -11,7 +11,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func (m *MysqlDB) GetWalletByID(ctx context.Context, id string) (*models.Wallet, error) {
+func (m *MysqlDB) GetWalletByID(ctx context.Context, id int32) (*models.Wallet, error) {
 	var wallet models.Wallet
 
 	res := m.Db.First(&wallet, id)
@@ -20,7 +20,7 @@ func (m *MysqlDB) GetWalletByID(ctx context.Context, id string) (*models.Wallet,
 
 		logger.Log.WithFields(logrus.Fields{"id": id}).Info("wallet not found")
 
-		return nil, utils.ErrRecordNotFound
+		return nil, utils.ErrWalletNotFound
 
 	} else if res.Error != nil {
 

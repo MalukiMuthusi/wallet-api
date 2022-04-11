@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/MalukiMuthusi/wallet-api/internal/models"
 	"github.com/MalukiMuthusi/wallet-api/internal/utils"
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
@@ -45,7 +46,7 @@ func SetUp() (*gorm.DB, error) {
 		return nil, err
 	}
 
-	err = db.AutoMigrate()
+	err = db.AutoMigrate(&models.Wallet{})
 	if err != nil {
 		return nil, err
 	}

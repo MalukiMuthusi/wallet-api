@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/MalukiMuthusi/wallet-api/handlers"
+	"github.com/MalukiMuthusi/wallet-api/internal/handlers"
 	"github.com/MalukiMuthusi/wallet-api/internal/logger"
 	"github.com/MalukiMuthusi/wallet-api/internal/storage/mysql"
 	"github.com/MalukiMuthusi/wallet-api/internal/utils"
@@ -29,7 +29,7 @@ func main() {
 	if err != nil {
 		logger.Log.WithField("database", err).Fatal("failed to start database")
 	}
-	
+
 	mysql := mysql.MysqlDB{Db: db}
 
 	balanceHandler := handlers.BalanceHandler{Store: &mysql}
