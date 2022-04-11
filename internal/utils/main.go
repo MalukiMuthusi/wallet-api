@@ -47,6 +47,7 @@ const (
 	WalletNotFound
 	RequestNotAllowed
 	FailedToProcessRequest
+	InvalidWalletIdParam
 )
 
 func (e CustomErrorCode) String() string {
@@ -65,6 +66,8 @@ func (e CustomErrorCode) String() string {
 		return "REQUEST_NOT_ALLOWED"
 	case FailedToProcessRequest:
 		return "FAILED_TO_PROCESS_REQUEST"
+	case InvalidWalletIdParam:
+		return "INVALID_WALLET_ID_PARAM"
 	default:
 		return "FAILED_TO_PROCESS_REQUEST"
 	}

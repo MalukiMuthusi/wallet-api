@@ -21,7 +21,7 @@ func (b *BalanceHandler) Handle(c *gin.Context) {
 		return
 	}
 
-	wallet, err := b.Store.GetWalletByID(c.Request.Context(), walletID.WalletID)
+	wallet, err := b.Store.GetWalletByID(c.Copy().Request.Context(), walletID.WalletID)
 
 	if err != nil {
 

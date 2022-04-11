@@ -11,7 +11,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func (m *MysqlDB) GetWalletByID(ctx context.Context, id int32) (*models.Wallet, error) {
+func (m *MysqlDB) GetWalletByID(ctx context.Context, id uint32) (*models.Wallet, error) {
 	var wallet models.Wallet
 
 	res := m.Db.First(&wallet, id)

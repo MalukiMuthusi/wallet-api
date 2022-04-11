@@ -12,7 +12,10 @@ import (
 	"gorm.io/gorm"
 )
 
-func (m *MysqlDB) DebitWallet(ctx context.Context, id int32, amount *decimal.Decimal) (*models.Wallet, error) {
+func (m *MysqlDB) DebitWallet(ctx context.Context, id uint32, amount *decimal.Decimal) (*models.Wallet, error) {
+
+	// TODO: Perform the operation as a database transaction
+
 	var wallet models.Wallet
 
 	res := m.Db.First(&wallet, id)

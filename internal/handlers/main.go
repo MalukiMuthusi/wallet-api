@@ -9,7 +9,7 @@ import (
 )
 
 type WalletIDParam struct {
-	WalletID int32 `uri:"wallet_id" binding:"required"`
+	WalletID uint32 `uri:"wallet_id" binding:"required"`
 }
 
 func GetWalletIDFromParam(c *gin.Context) (*WalletIDParam, error) {
@@ -17,7 +17,7 @@ func GetWalletIDFromParam(c *gin.Context) (*WalletIDParam, error) {
 
 	if err := c.ShouldBindUri(&walletID); err != nil {
 		e := models.BasicError{
-			Code:    utils.InvalidAmount.String(),
+			Code:    utils.InvalidWalletIdParam.String(),
 			Message: "provide a valid wallet id parameter in the request",
 		}
 

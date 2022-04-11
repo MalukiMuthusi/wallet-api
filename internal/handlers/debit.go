@@ -45,7 +45,7 @@ func (d *DebitHandler) Handle(c *gin.Context) {
 		return
 	}
 
-	wallet, err := d.Store.DebitWallet(c.Request.Context(), walletID.WalletID, &a)
+	wallet, err := d.Store.DebitWallet(c.Copy().Request.Context(), walletID.WalletID, &a)
 
 	if err != nil {
 		switch err {
