@@ -2,7 +2,7 @@
 
 API For an online wallet management application.
 
-The API documentation is hosted at [https://theta-outrider-342406.web.app](9)
+The API documentation is hosted at [https://theta-outrider-342406.web.app][9]
 
 Use the API documentation to learn how to make queries
 
@@ -41,22 +41,22 @@ export PORT=8080
 
 ### Run
 
-Make sure you have go installed. For installation guidance refer to [Golang-installation-page](13)
+Make sure you have go installed. For installation guidance refer to [Golang-installation-page][13]
 In the root folder of the application run `go install`. This will compile and install the application to your `$PATH`
 Run the application `wallet-api`
 
 ## References
 
-- OpenAPI Specification (OAS) [OpenAPI-Spec-documentation](2)
-- Swagger Editor [Swagger-editor-github](3)
-- Link to the Swagger editor hosted online for use [Swagger-editor](8)
-- OpenAPI vscode editor [Open-API-marketplace-link](4)
-- Swagger Codegen [Swagger-codegen-github](5)
-- Generate Golang server stubs [go-server-github](6)
-- Use SDK Manager to install the development tools, used by Swagger tools [sdkman-website](7)
-- Mysql Database documentation, for installation, configuration and usage [Mysql-dev-website](10)
-- Go Object Relational Mapper(gorm), [gorm-docs](11)
-- HTTP status codes [HTTP-Status-Codes-Website](1)
+- OpenAPI Specification (OAS) [OpenAPI-Spec-documentation][2]
+- Swagger Editor [Swagger-editor-github][3]
+- Link to the Swagger editor hosted online for use [Swagger-editor][8]
+- OpenAPI vscode editor [Open-API-marketplace-link][4]
+- Swagger Codegen [Swagger-codegen-github]([5]
+- Generate Golang server stubs [go-server-github][6]
+- Use SDK Manager to install the development tools, used by Swagger tools [sdkman-website][7]
+- Mysql Database documentation, for installation, configuration and usage [Mysql-dev-website][10]
+- Go Object Relational Mapper(gorm), [gorm-docs][11]
+- HTTP status codes [HTTP-Status-Codes-Website][1]
 
 [1]: https://restfulapi.net/http-status-codes
 [2]: https://swagger.io/docs/specification/about
