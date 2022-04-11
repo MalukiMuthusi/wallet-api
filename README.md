@@ -4,6 +4,28 @@ OpenAPI specification of a wallet management API
 
 The API documentation is hosted at [API-documentation-site](9). Use it to learn about the APIs provided and their information.
 
+## Set Up
+
+## Envs
+
+To run the application make sure you have set the following environment variables
+
+```sh
+export WALLET_DB_USER=
+export WALLET_DB_PWD=
+export WALLET_NAME=
+export WALLET_DB_PORT=
+export WALLET_DB_HOST=
+export WALLET_DB_TIMEZONE=
+```
+
+For localhost running the following are already set to defaults
+
+```sh
+export WALLET_DB_CLOUD=false
+export PORT=8080
+```
+
 ## References
 
 - OpenAPI Specification (OAS) [OpenAPI-Spec-documentation](2)

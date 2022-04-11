@@ -12,8 +12,10 @@ import (
 	"github.com/MalukiMuthusi/wallet-api/handlers"
 	"github.com/MalukiMuthusi/wallet-api/internal/logger"
 	"github.com/MalukiMuthusi/wallet-api/internal/storage/mysql"
+	"github.com/MalukiMuthusi/wallet-api/internal/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 )
 
 func main() {
@@ -45,7 +47,7 @@ func main() {
 		}
 	}
 
-	port := os.Getenv("PORT")
+	port := viper.GetString(utils.Port)
 
 	srv := &http.Server{
 		Addr: fmt.Sprintf("0.0.0.0:%s", port),
@@ -94,4 +96,46 @@ func main() {
 
 func DebugPrintRoute(httpMethod, absolutePath, handlerName string, nuHandlers int) {
 	logger.Log.WithFields(logrus.Fields{"httpMethod": httpMethod, "path": absolutePath, "handlerName": handlerName, "nuHandlers": nuHandlers}).Info("endpointRequest")
+}
+
+func init() {
+	viper.AutomaticEnv()
+
+	viper.SetEnvPrefix(utils.AppName)
+
+	BindEnvs()
+
+	viper.SetDefault(utils.Port, "8080")
+	viper.SetDefault(utils.DbHostedOnCloud, false)
+
+	CheckMustBeSetEnvs()
+}
+
+func BindEnvs() {
+	viper.BindEnv(utils.Port, "PORT")
+	viper.BindEnv(utils.DbUser)
+	viper.BindEnv(utils.DbPwd)
+	viper.BindEnv(utils.DbPort)
+	viper.BindEnv(utils.DbName)
+	viper.BindEnv(utils.DbHost)
+	viper.BindEnv(utils.DbHostedOnCloud)
+	viper.BindEnv(utils.DbConnectionName)
+	viper.BindEnv(utils.DbTimeZone)
+}
+
+func EnvMustBeSet(key string) {
+	if !viper.IsSet(key) {
+		logger.Log.WithField(key, false).Fatal("not set")
+	}
+}
+
+func CheckMustBeSetEnvs() {
+	EnvMustBeSet(utils.DbUser)
+	EnvMustBeSet(utils.DbPwd)
+	EnvMustBeSet(utils.DbPort)
+	EnvMustBeSet(utils.DbName)
+	EnvMustBeSet(utils.DbHost)
+	EnvMustBeSet(utils.DbHostedOnCloud)
+	EnvMustBeSet(utils.DbConnectionName)
+	EnvMustBeSet(utils.DbTimeZone)
 }
