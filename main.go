@@ -47,7 +47,9 @@ func main() {
 		wallets := v1.Group("/wallets")
 		{
 			wallets.GET(":wallet_id/balance", balanceHandler.Handle)
+
 			wallets.POST(":wallet_id/credit", creditHandler.Handle)
+			
 			wallets.POST(":wallet_id/debit", debitHandler.Handle)
 		}
 	}

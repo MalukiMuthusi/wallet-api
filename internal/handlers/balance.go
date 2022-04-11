@@ -15,15 +15,9 @@ type BalanceHandler struct {
 
 func (b *BalanceHandler) Handle(c *gin.Context) {
 
-	var walletID WalletIDParam
-
-	if err := c.ShouldBindUri(&walletID); err != nil {
-		e := models.BasicError{
-			Code:    utils.InvalidAmount.String(),
-			Message: "provide a valid wallet id parameter in the request",
-		}
-
-		c.JSON(http.StatusUnprocessableEntity, e)
+	walletID, err := GetWalletIDFromParam(c)
+	if err != nil {
+		// Will never get here
 		return
 	}
 

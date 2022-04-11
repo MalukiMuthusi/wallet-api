@@ -10,7 +10,7 @@ import (
 type Store interface {
 	GetWalletByID(ctx context.Context, id int32) (*models.Wallet, error)
 
-	DebitWallet(ctx context.Context, amount decimal.Decimal) (*models.Wallet, error)
+	DebitWallet(ctx context.Context, id int32, amount *decimal.Decimal) (*models.Wallet, error)
 
 	CreditWallet(ctx context.Context, amount decimal.Decimal) (*models.Wallet, error)
 }
