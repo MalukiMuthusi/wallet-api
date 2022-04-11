@@ -10,7 +10,8 @@ import (
 	"time"
 
 	"github.com/MalukiMuthusi/wallet-api/handlers"
-	"github.com/MalukiMuthusi/wallet-api/logger"
+	"github.com/MalukiMuthusi/wallet-api/internal/logger"
+	"github.com/MalukiMuthusi/wallet-api/internal/storage/mysql"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 )
@@ -21,6 +22,15 @@ func main() {
 	flag.DurationVar(&wait, "graceful-timeout", time.Second*5, "the duration for which the server gracefully wait for existing connections to finish - e.g. 15s or 1m")
 	flag.Parse()
 
+	// Set the storage mechanism to use
+	mysql := mysql.MysqlDB{}
+
+	balanceHandler := handlers.BalanceHandler{Store: &mysql}
+
+	creditHandler := handlers.CreditHandler{Store: &mysql}
+
+	debitHandler := handlers.DebitHandler{Store: &mysql}
+
 	r := gin.New()
 
 	gin.DebugPrintRouteFunc = DebugPrintRoute
@@ -29,9 +39,9 @@ func main() {
 	{
 		wallets := v1.Group("/wallets")
 		{
-			wallets.GET(":wallet_id/balance", handlers.BalanceHandler)
-			wallets.POST(":wallet_id/credit", handlers.CreditHandler)
-			wallets.POST(":wallet_id/debit", handlers.DebitHandler)
+			wallets.GET(":wallet_id/balance", balanceHandler.Handle)
+			wallets.POST(":wallet_id/credit", creditHandler.Handle)
+			wallets.POST(":wallet_id/debit", debitHandler.Handle)
 		}
 	}
 

@@ -13,6 +13,8 @@ The API documentation is hosted at [API-documentation-site](9). Use it to learn 
 - Swagger Codegen [Swagger-codegen-github](5)
 - Generate Golang server stubs [go-server-github](6)
 - Use SDK Manager to install the development tools, used by Swagger tools [sdkman-website](7)
+- Mysql Database documentation, for installation, configuration and usage [Mysql-dev-website](10)
+- Go Object Relational Mapper(gorm), [gorm-docs](11)
 - HTTP status codes [HTTP-Status-Codes-Website](1)
 
 [1]: https://restfulapi.net/http-status-codes
@@ -24,3 +26,6 @@ The API documentation is hosted at [API-documentation-site](9). Use it to learn 
 [7]: https://sdkman.io/sdks
 [8]: https://editor.swagger.io
 [9]: https://theta-outrider-342406.web.app
+[10]: https://dev.mysql.com/doc
+[11]: https://gorm.io/docs
+[12]: https://stackoverflow.com/questions/34046194/how-to-pass-arguments-to-router-handlers-in-golang-using-gin-web-framework

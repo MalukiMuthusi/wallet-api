@@ -16,7 +16,6 @@ func init() {
 	Log.SetReportCaller(true)
 
 	if env == "dev" {
-		Log.SetFormatter(&logrus.JSONFormatter{})
 		Log.SetLevel(logrus.DebugLevel)
 	}
 
