@@ -19,6 +19,7 @@ paths:
     get:
       summary: Returns a wallet's balance amount
       description: Returns the balance of the wallet that has the provided id
+      operationId: GetBalance
       parameters:
         - $ref: "#/components/parameters/wallet_id"
       responses:
@@ -27,40 +28,41 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Balance"
+                $ref: "#/components/schemas/Wallet"
 
-        "400":
-          description: Invalid wallet id provided
+        "422":
+          description: Invalid value provided for the wallet id
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BasicError"
+                $ref: "#/components/schemas/InvalidWalletIdParam"
 
         "404":
           description: Wallet not found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BasicError"
+                $ref: "#/components/schemas/WalletNotFound"
 
         "500":
           description: Server encountered error when processing your request. This a server error. When in debugging session check the response to see what happened to the server
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BasicError"
+                $ref: "#/components/schemas/InternalServerError"
 
         "501":
           description: The operation has not been implemented yet.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BasicError"
+                $ref: "#/components/schemas/NotImplementedError"
 
   /wallets/{wallet_id}/credit:
     post:
       summary: Add an amount to a wallet
       description: Adds the provided amount to the wallet that is referred by the provided id
+      operationId: CreditWallet
       parameters:
         - $ref: "#/components/parameters/wallet_id"
       requestBody:
@@ -76,47 +78,43 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Balance"
-
-        "400":
-          description: Bad request, check the response for the error code and message to see where the problem is
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BasicError"
+                $ref: "#/components/schemas/Wallet"
 
         "404":
           description: Wallet not found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BasicError"
+                $ref: "#/components/schemas/WalletNotFound"
 
         "422":
           description: Server could not process your request. Check the response for the error code and the message to see where the probelm is
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BasicError"
+                oneOf:
+                  - $ref: "#/components/schemas/InvalidAmount"
+                  - $ref: "#/components/schemas/InvalidWalletIdParam"
 
         "500":
           description: Server encountered error when processing your request. This a server error. When in debugging session check the response to see what happened to the server
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BasicError"
+                $ref: "#/components/schemas/InternalServerError"
 
         "501":
           description: The operation has not been implemented yet.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BasicError"
+                $ref: "#/components/schemas/NotImplementedError"
 
   /wallets/{wallet_id}/debit:
     post:
       summary: Subtracts an amount from  a wallet
       description: Subtracts the given amount from the wallet referred by the provided wallet id
+      operationId: DebitWallet
       parameters:
         - $ref: "#/components/parameters/wallet_id"
       requestBody:
@@ -133,42 +131,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Balance"
-
-        "400":
-          description: Bad request, check the response for the error code and message to see where the problem is
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BasicError"
+                $ref: "#/components/schemas/Wallet"
 
         "404":
           description: Wallet not found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BasicError"
+                $ref: "#/components/schemas/WalletNotFound"
 
         "422":
           description: Server could not process your request. Check the response for the error code and the message to see where the probelm is
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BasicError"
+                oneOf:
+                  - $ref: "#/components/schemas/InvalidAmount"
+                  - $ref: "#/components/schemas/InvalidWalletIdParam"
 
         "500":
           description: Server encountered error when processing your request. This a server error. When in debugging session check the response to see what happened to the server
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BasicError"
+                $ref: "#/components/schemas/InternalServerError"
 
         "501":
           description: The operation has not been implemented yet.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BasicError"
+                $ref: "#/components/schemas/NotImplementedError"
 
 components:
   schemas:
@@ -179,9 +172,15 @@ components:
           type: string
         currency:
           type: string
-          description: Only one currency type is currently supported, euro
+          default: EUR
           enum:
             - EUR
+
+    Wallet:
+      type: object
+      properties:
+        balance:
+          type: string
 
     BasicError:
       type: object
@@ -193,24 +192,66 @@ components:
           type: string
           enum:
             - INSUFFICIENT_FUNDS
-            - INVALID_AMOUNT_PARAMETER
+            - INVALID_WALLET_ID_PARAM
             - WALLET_NOT_FOUND
-            - FAILED_TO_COMPLETE_PROCESSING_REQUEST
+            - FAILED_TO_PROCESS_REQUEST
             - REQUEST_NOT_ALLOWED
             - INTERNAL_SERVER_ERROR
             - NOT_IMPLEMENTED
+            - INTERNAL_SERVER_ERROR
+            - INVALID_AMOUNT
         message:
           type: string
 
-    Balance:
-      allOf:
-        - $ref: "#/components/schemas/Amount"
-        - type: string
-          properties:
-            date:
-              type: string
-          required:
-            - date
+    InvalidAmount:
+      type: object
+      properties:
+        code:
+          type: string
+          default: INVALID_AMOUNT
+        message:
+          type: string
+          default: provide a valid amount value
+
+    InvalidWalletIdParam:
+      type: object
+      properties:
+        code:
+          type: string
+          default: INVALID_WALLET_ID_PARAM
+        message:
+          type: string
+          default: provide a valid wallet id parameter in the request
+
+    WalletNotFound:
+      type: object
+      properties:
+        code:
+          type: string
+          default: WALLET_NOT_FOUND
+        message:
+          type: string
+          default: provide a valid wallet id parameter in the request
+
+    InternalServerError:
+      type: object
+      properties:
+        code:
+          type: string
+          default: INTERNAL_SERVER_ERROR
+        message:
+          type: string
+          default: failed to complete processing request
+
+    NotImplementedError:
+      type: object
+      properties:
+        code:
+          type: string
+          default: NOT_IMPLIMENTED
+        message:
+          type: string
+          default: operation not implemented on the server
 
   parameters:
     wallet_id:

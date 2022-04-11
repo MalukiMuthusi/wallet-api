@@ -1,5 +1,7 @@
 # Wallet API
 
+![Screenshot-of-API-documentation](site-screenshot.png)
+
 API For an online wallet management application.
 
 The API documentation is hosted at [https://theta-outrider-342406.web.app][9]
