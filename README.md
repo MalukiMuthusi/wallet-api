@@ -17,6 +17,7 @@ export WALLET_NAME=
 export WALLET_DB_PORT=
 export WALLET_DB_HOST=
 export WALLET_DB_TIMEZONE=
+export WALLET_DB_INSTANCE_CONNECTION_NAME="theta-outrider-342406:us-central1:wallet"
 ```
 
 For localhost running the following are already set to defaults

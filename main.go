@@ -25,7 +25,12 @@ func main() {
 	flag.Parse()
 
 	// Set the storage mechanism to use
-	mysql := mysql.MysqlDB{}
+	db, err := mysql.SetUp()
+	if err != nil {
+		logger.Log.WithField("database", err).Fatal("failed to start database")
+	}
+	
+	mysql := mysql.MysqlDB{Db: db}
 
 	balanceHandler := handlers.BalanceHandler{Store: &mysql}
 
