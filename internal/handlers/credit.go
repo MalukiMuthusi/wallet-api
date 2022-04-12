@@ -16,7 +16,6 @@ type CreditHandler struct {
 func (cr *CreditHandler) Handle(c *gin.Context) {
 	walletID, err := GetWalletIDFromParam(c)
 	if err != nil {
-		// Will never get here
 		return
 	}
 

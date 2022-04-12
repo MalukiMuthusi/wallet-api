@@ -1,5 +1,7 @@
 # Wallet API
 
+The API endpoint is [https://wallet-api-fur355ca3q-uc.a.run.app][18]
+
 ![Screenshot-of-API-documentation](site-screenshot.png)
 
 API For an online wallet management application.
@@ -90,4 +92,4 @@ The api production endpoint is
 [15]: https://12factor.net
 [16]: https://cloud.google.com/sql/docs/mysql/sql-proxy "Cloud SQL Auth Proxy"
 [17]: https://dbeaver.io
-[18]: https://wallet-api-fur355ca3q-uc.a.run.app/v1/wallets
+[18]: https://wallet-api-fur355ca3q-uc.a.run.app

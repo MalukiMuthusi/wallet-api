@@ -17,7 +17,6 @@ func (d *DebitHandler) Handle(c *gin.Context) {
 
 	walletID, err := GetWalletIDFromParam(c)
 	if err != nil {
-		// Will never get here
 		return
 	}
 

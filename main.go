@@ -40,6 +40,7 @@ func main() {
 
 	r := gin.New()
 
+	// Log all incoming requests
 	gin.DebugPrintRouteFunc = DebugPrintRoute
 
 	v1 := r.Group("/v1")
@@ -101,6 +102,7 @@ func main() {
 
 }
 
+// Log incoming http requests
 func DebugPrintRoute(httpMethod, absolutePath, handlerName string, nuHandlers int) {
 	logger.Log.WithFields(logrus.Fields{"httpMethod": httpMethod, "path": absolutePath, "handlerName": handlerName, "nuHandlers": nuHandlers}).Info("endpointRequest")
 }
