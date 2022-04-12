@@ -7,7 +7,6 @@ import (
 	"github.com/MalukiMuthusi/wallet-api/internal/storage"
 	"github.com/MalukiMuthusi/wallet-api/internal/utils"
 	"github.com/gin-gonic/gin"
-	"github.com/shopspring/decimal"
 )
 
 type DebitHandler struct {
@@ -34,18 +33,12 @@ func (d *DebitHandler) Handle(c *gin.Context) {
 		return
 	}
 
-	a, err := decimal.NewFromString(amount.Value)
+	a, err := GetAmountValueFromString(amount.Value, c)
 	if err != nil {
-		e := models.BasicError{
-			Code:    utils.InvalidAmount.String(),
-			Message: "provide a valid amount value",
-		}
-
-		c.JSON(http.StatusUnprocessableEntity, e)
 		return
 	}
 
-	wallet, err := d.Store.DebitWallet(c.Copy().Request.Context(), walletID.WalletID, &a)
+	wallet, err := d.Store.DebitWallet(c.Copy().Request.Context(), walletID.WalletID, a)
 
 	if err != nil {
 		switch err {
