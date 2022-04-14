@@ -9,6 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CreditHandler handles requests to the /credit endpoint
+
 type CreditHandler struct {
 	Store storage.Store
 }

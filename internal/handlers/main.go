@@ -8,10 +8,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// WalletIDParam refers to an id specified in the path parameter
 type WalletIDParam struct {
 	WalletID uint32 `uri:"wallet_id" binding:"required"`
 }
 
+// GetWalletIDFromParam makes sure the wallet_id path parameter value provided is a valid one
 func GetWalletIDFromParam(c *gin.Context) (*WalletIDParam, error) {
 	var walletID WalletIDParam
 

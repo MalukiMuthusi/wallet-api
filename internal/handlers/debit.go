@@ -9,6 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// DebitHandler handles requests to the /debit endpoint
+
 type DebitHandler struct {
 	Store storage.Store
 }

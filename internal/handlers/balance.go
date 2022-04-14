@@ -1,3 +1,6 @@
+/*
+Package handlers has functions that process http requests
+*/
 package handlers
 
 import (
@@ -9,6 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// BalanceHandler handles requests for the balance endpoint
 type BalanceHandler struct {
 	Store storage.Store
 }
