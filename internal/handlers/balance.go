@@ -24,44 +24,48 @@ func (b *BalanceHandler) Handle(c *gin.Context) {
 
 	if err != nil {
 
+		var status int
+		var basicError models.BasicError
+
 		switch err {
 
 		case utils.ErrWalletNotFound:
-			e := models.BasicError{
+			basicError = models.BasicError{
 				Code:    utils.WalletNotFound.String(),
 				Message: "wallet not found",
 			}
-			c.JSON(http.StatusNotFound, e)
-			return
+
+			status = http.StatusNotFound
 
 		case utils.ErrFailedToProcessRequest:
-			e := models.BasicError{
+			basicError = models.BasicError{
 				Code:    utils.InternalServerError.String(),
 				Message: "failed to complete processing request",
 			}
 
-			c.JSON(http.StatusInternalServerError, e)
-			return
+			status = http.StatusInternalServerError
 
 		case utils.ErrOperationNotImplemented:
-			e := models.BasicError{
+			basicError = models.BasicError{
 				Code:    utils.NotImplemented.String(),
 				Message: "operation not implemented on the server",
 			}
 
-			c.JSON(http.StatusNotImplemented, e)
-			return
+			status = http.StatusNotImplemented
 
 		default:
-			e := models.BasicError{
+			basicError = models.BasicError{
 				Code:    utils.InternalServerError.String(),
 				Message: "failed to process request",
 			}
 
-			c.JSON(http.StatusInternalServerError, e)
-			return
+			status = http.StatusInternalServerError
 
 		}
+
+		c.JSON(status, basicError)
+
+		return
 	}
 
 	c.JSON(http.StatusOK, wallet)

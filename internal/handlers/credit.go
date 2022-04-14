@@ -31,7 +31,7 @@ func (cr *CreditHandler) Handle(c *gin.Context) {
 		return
 	}
 
-	a, err := GetAmountValueFromString(amount.Value, c)
+	a, err := amount.ValueFromString()
 	if err != nil {
 		return
 	}
@@ -39,35 +39,40 @@ func (cr *CreditHandler) Handle(c *gin.Context) {
 	wallet, err := cr.Store.CreditWallet(c.Copy().Request.Context(), walletID.WalletID, a)
 
 	if err != nil {
+
+		var status int
+		var basicError models.BasicError
+
 		switch err {
 
 		case utils.ErrOperationNotImplemented:
-			e := models.BasicError{
+			basicError = models.BasicError{
 				Code:    utils.NotImplemented.String(),
 				Message: "operation not implemented on the server",
 			}
 
-			c.JSON(http.StatusNotImplemented, e)
-			return
+			status = http.StatusNotImplemented
 
 		case utils.ErrFailedToProcessRequest:
-			e := models.BasicError{
+			basicError = models.BasicError{
 				Code:    utils.InternalServerError.String(),
 				Message: "failed to complete processing request",
 			}
 
-			c.JSON(http.StatusInternalServerError, e)
-			return
+			status = http.StatusInternalServerError
 
 		default:
-			e := models.BasicError{
+			basicError = models.BasicError{
 				Code:    utils.InternalServerError.String(),
 				Message: "failed to process request",
 			}
 
-			c.JSON(http.StatusInternalServerError, e)
-			return
+			status = http.StatusInternalServerError
 		}
+
+		c.JSON(status, basicError)
+
+		return
 
 	}
 

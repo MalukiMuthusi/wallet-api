@@ -12,6 +12,7 @@ import (
 )
 
 func (m *MysqlDB) GetWalletByID(ctx context.Context, id uint32) (*models.Wallet, error) {
+	
 	var wallet models.Wallet
 
 	res := m.Db.First(&wallet, id)
